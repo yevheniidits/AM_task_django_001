@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Добро пожаловать</title>
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label><strong>Загрузить/обновить каталог</strong></label><br>
+        <input type="file" name="upload" size="10" multiple accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+        <input type="submit" value="Upload">
+        <br>
+    </form>
+    <table border="1" class="sortable">
+        <caption><strong>Каталог товаров</strong></caption>
+            <tr>
+                <th>Артикул</th>
+                <th>Категория</th>
+                <th>Производитель</th>
+                <th>Модель</th>
+                <th>Дилер UAH</th>
+                <th>РРЦ</th>
+            </tr>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.vendor_code }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.manufacturer }}</td>
+                <td>{{ product.model_name }}</td>
+                <td>{{ product.dealer_price }}</td>
+                <td>{{ product.retail_price }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
